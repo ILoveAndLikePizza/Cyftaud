@@ -1,4 +1,6 @@
 using System.Text.RegularExpressions;
+using System.Net.Http;
+using System.IO.Compression;
 
 namespace Cyftaud
 {
@@ -25,8 +27,19 @@ namespace Cyftaud
             return drive;
         }
 
-            private void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
+            string[] args = Environment.GetCommandLineArgs();
+            if (args.Length >= 2)
+            {
+                if (File.Exists(args[1]))
+                {
+                    DoZippedFolder.Checked = true;
+                    TargetFolderBox.Text = args[1];
+                }
+                else MessageBox.Show("You attempted to load an unexisting file!", "Unable to load", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             DriveInfo[] drives = DriveInfo.GetDrives();
             for (int i = 0; i < drives.Length; i++)
             {
@@ -42,6 +55,24 @@ namespace Cyftaud
                 } catch (System.IO.IOException) {}
             }
             DrivesList.SelectedIndex = FormatFileSystem.SelectedIndex = 0;
+
+            // update checker
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Add("User-Agent", "The Cyftaud Application");
+                HttpResponseMessage response = client.GetAsync("https://api.github.com/repos/ILoveAndLikePizza/Cyftaud/releases/latest").Result;
+                response.EnsureSuccessStatusCode();
+                string responseText = response.Content.ReadAsStringAsync().Result;
+                if (!responseText.Contains("\"name\":\"Cyftaud v" + ProductVersion + "\""))
+                {
+                    if (MessageBox.Show("There is a new update available for Cyftaud.\nWould you like to visit the download page?", "Update available", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) System.Diagnostics.Process.Start("cmd.exe", "/c start https://github.com/ILoveAndLikePizza/Cyftaud/releases");
+                }
+            }
+            catch (Exception)
+            {
+                StatusLabel.Text += " (update check failed)";
+            }
         }
 
         private void CopyTarget_CheckedChanged(object sender, EventArgs e)
@@ -82,7 +113,6 @@ namespace Cyftaud
         {
             if (finished) Environment.Exit(1); else
             {
-
                 string oldFS = GetDriveInformation().DriveFormat;
                 if (DoDriveFormat.Checked)
                 {
@@ -136,10 +166,11 @@ namespace Cyftaud
                     MessageBox.Show(GetDriveLetter() + " /FS:" + newFS.ToUpper() + quickFormat + "/V:" + NewDeviceName);
                 }
                 if (DoFolderCopy.Checked && !Directory.Exists(GetDriveLetter() + "\\" + CustomFolderName.Text)) Directory.CreateDirectory(GetDriveLetter() + "\\" + CustomFolderName.Text);
+
+                string target = (DoFolderCopy.Checked) ? GetDriveLetter() + "\\" + CustomFolderName.Text + "\\": GetDriveLetter() + "\\";
                 if (DoNormalFolder.Checked)
                 {
                     string[] filenames = Directory.GetFiles(TargetFolderBox.Text);
-                    string target = (DoFolderCopy.Checked) ? GetDriveLetter() + "\\" + CustomFolderName.Text + "\\": GetDriveLetter() + "\\";
                     for (int i = 0; i < filenames.Length; i++)
                     {
                         string[] fragments = filenames[i].Split('\\');
@@ -151,7 +182,7 @@ namespace Cyftaud
                 }
                 else if (DoZippedFolder.Checked)
                 {
-
+                    ZipFile.ExtractToDirectory(TargetFolderBox.Text, target);
                 }
 
                 running = false;
@@ -179,6 +210,12 @@ namespace Cyftaud
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (running) e.Cancel = true;
+        }
+
+        private void AboutButton_Click(object sender, EventArgs e)
+        {
+            Form2 form = new Form2();
+            form.ShowDialog();
         }
     }
 }
