@@ -50,11 +50,14 @@
             this.DoQuickFormat = new System.Windows.Forms.CheckBox();
             this.FormatFileSystem = new System.Windows.Forms.ComboBox();
             this.DoDriveFormat = new System.Windows.Forms.CheckBox();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.StartButton = new System.Windows.Forms.Button();
+            this.StatusBar = new System.Windows.Forms.StatusStrip();
+            this.Progress = new System.Windows.Forms.ToolStripProgressBar();
+            this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.FolderBox.SuspendLayout();
             this.DriveBox.SuspendLayout();
             this.FormatBox.SuspendLayout();
+            this.StatusBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainLabel
@@ -311,32 +314,50 @@
             this.DoDriveFormat.UseVisualStyleBackColor = true;
             this.DoDriveFormat.CheckedChanged += new System.EventHandler(this.DoDriveFormat_CheckedChanged);
             // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(17, 502);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(364, 36);
-            this.progressBar1.TabIndex = 5;
-            // 
             // StartButton
             // 
             this.StartButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.StartButton.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.StartButton.Location = new System.Drawing.Point(387, 501);
+            this.StartButton.Location = new System.Drawing.Point(16, 496);
             this.StartButton.Name = "StartButton";
-            this.StartButton.Size = new System.Drawing.Size(79, 38);
+            this.StartButton.Size = new System.Drawing.Size(451, 38);
             this.StartButton.TabIndex = 6;
-            this.StartButton.Text = "Start";
+            this.StartButton.Text = "Start!";
             this.StartButton.UseVisualStyleBackColor = true;
             this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
+            // 
+            // StatusBar
+            // 
+            this.StatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Progress,
+            this.StatusLabel});
+            this.StatusBar.Location = new System.Drawing.Point(0, 549);
+            this.StatusBar.Name = "StatusBar";
+            this.StatusBar.Size = new System.Drawing.Size(483, 26);
+            this.StatusBar.SizingGrip = false;
+            this.StatusBar.Stretch = false;
+            this.StatusBar.TabIndex = 8;
+            this.StatusBar.Text = "Status";
+            // 
+            // Progress
+            // 
+            this.Progress.Name = "Progress";
+            this.Progress.Size = new System.Drawing.Size(213, 20);
+            // 
+            // StatusLabel
+            // 
+            this.StatusLabel.Margin = new System.Windows.Forms.Padding(5, 3, 0, 2);
+            this.StatusLabel.Name = "StatusLabel";
+            this.StatusLabel.Size = new System.Drawing.Size(39, 17);
+            this.StatusLabel.Text = "Ready";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 559);
+            this.ClientSize = new System.Drawing.Size(483, 575);
+            this.Controls.Add(this.StatusBar);
             this.Controls.Add(this.StartButton);
-            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.FormatBox);
             this.Controls.Add(this.DriveBox);
             this.Controls.Add(this.FolderBox);
@@ -346,6 +367,7 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Cyftaud";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.FolderBox.ResumeLayout(false);
             this.FolderBox.PerformLayout();
@@ -353,6 +375,8 @@
             this.DriveBox.PerformLayout();
             this.FormatBox.ResumeLayout(false);
             this.FormatBox.PerformLayout();
+            this.StatusBar.ResumeLayout(false);
+            this.StatusBar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -376,7 +400,6 @@
         private RadioButton DoRootCopy;
         private GroupBox FormatBox;
         private CheckBox DoDriveFormat;
-        private ProgressBar progressBar1;
         private Button StartButton;
         private Label NewNameLabel;
         private TextBox NewDeviceName;
@@ -384,5 +407,9 @@
         private CheckBox DoQuickFormat;
         private ComboBox FormatFileSystem;
         private CheckBox DoOverwrite;
+        private Label label1;
+        private StatusStrip StatusBar;
+        private ToolStripStatusLabel StatusLabel;
+        private ToolStripProgressBar Progress;
     }
 }
