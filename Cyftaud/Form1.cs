@@ -1,6 +1,7 @@
 using System.Text.RegularExpressions;
 using System.Net.Http;
 using System.IO.Compression;
+using System.Diagnostics;
 
 namespace Cyftaud
 {
@@ -12,6 +13,13 @@ namespace Cyftaud
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void RunCommand(string command, string arguments)
+        {
+            ProcessStartInfo process = new ProcessStartInfo(command, arguments);
+            process.CreateNoWindow = true;
+            System.Diagnostics.Process.Start(process);
         }
 
         private string GetDriveLetter()
@@ -81,11 +89,6 @@ namespace Cyftaud
             }
         }
 
-        private void CopyTarget_CheckedChanged(object sender, EventArgs e)
-        {
-            CustomFolderName.Enabled = DoFolderCopy.Checked;
-        }
-
         private void TargetFolderBrowse_Click(object sender, EventArgs e)
         {
             if (DoNormalFolder.Checked)
@@ -108,11 +111,6 @@ namespace Cyftaud
                     TargetFolderBox.Text = dialog.FileName;
                 }
             }
-        }
-
-        private void TypeOfFolder_CheckedChanged(object sender, EventArgs e)
-        {
-            TargetFolderBox.Text = "";
         }
 
         private void StartButton_Click(object sender, EventArgs e)
@@ -178,9 +176,7 @@ namespace Cyftaud
                     StatusLabel.Text = "Formatting...";
                     string newFS = (FormatFileSystem.Text == FormatFileSystem.Items[0].ToString()) ? oldFS : FormatFileSystem.Text;
                     string quickFormat = (DoQuickFormat.Checked) ? " /Q" : "";
-                    //System.Diagnostics.Process.Start("format.com", GetDriveLetter() + " /FS:" + newFS + quickFormat + " /V:" + NewDeviceName);
-                    MessageBox.Show(GetDriveLetter() + " /FS:" + newFS.ToUpper() + quickFormat + "/V:" + NewDeviceName);
-                    MessageBox.Show(oldFS, newFS);
+                    //RunCommand("format.com", GetDriveLetter() + " /FS:" + newFS + quickFormat + " /V:" + NewDeviceName.Text);
                 }
                 StatusLabel.Text = "Copying...";
                 if (DoFolderCopy.Checked && !Directory.Exists(GetDriveLetter() + "\\" + CustomFolderName.Text)) Directory.CreateDirectory(GetDriveLetter() + "\\" + CustomFolderName.Text);
@@ -195,7 +191,7 @@ namespace Cyftaud
                         string filename = fragments[fragments.Length - 1];
                         StatusLabel.Text = "Copying " + filename + "...";
                         File.Copy(filenames[i], target + filename, DoOverwrite.Checked);
-                        Progress.Value += (int)Math.Round(Progress.Maximum / (double)filenames.Length);
+                        Progress.Value = Math.Min(Progress.Value + (int)Math.Round(Progress.Maximum / (double)filenames.Length), Progress.Maximum);
                     }
                 }
                 else if (DoZippedFolder.Checked)
@@ -211,11 +207,6 @@ namespace Cyftaud
             }
         }
 
-        private void DrivesList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (DoDriveFormat.Checked) NewDeviceName.Text = GetDriveInformation().VolumeLabel;
-        }
-
         private void DoDriveFormat_CheckedChanged(object sender, EventArgs e)
         {
             DoOverwrite.Enabled = !DoDriveFormat.Checked;
@@ -223,6 +214,21 @@ namespace Cyftaud
                 = DoDriveFormat.Checked;
 
             NewDeviceName.Text = (NewDeviceName.Enabled) ? GetDriveInformation().VolumeLabel : "";
+        }
+
+        private void CopyTarget_CheckedChanged(object sender, EventArgs e)
+        {
+            CustomFolderName.Enabled = DoFolderCopy.Checked;
+        }
+
+        private void TypeOfFolder_CheckedChanged(object sender, EventArgs e)
+        {
+            TargetFolderBox.Text = "";
+        }
+
+        private void DrivesList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (DoDriveFormat.Checked) NewDeviceName.Text = GetDriveInformation().VolumeLabel;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
