@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,20 +18,26 @@ namespace Cyftaud
             InitializeComponent();
             NameVersionLabel.Text += ProductVersion;
         }
+        private void OpenURL(string url)
+        {
+            ProcessStartInfo process = new ProcessStartInfo("cmd.exe", "/c start " + url);
+            process.CreateNoWindow = true;
+            System.Diagnostics.Process.Start(process);
+        }
 
         private void WebsiteButton_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("cmd.exe", "/c start https://nm-games.eu");
+            OpenURL("https://nm-games.eu");
         }
 
         private void GithubButton_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("cmd.exe", "/c start https://github.com/ILoveAndLikePizza/Cyftaud");
+            OpenURL("https://github.com/ILoveAndLikePizza/Cyftaud");
         }
 
         private void DiscordButton_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("cmd.exe", "/c start https://discord.gg/CaMaGRXDqB");
+            OpenURL("https://discord.gg/CaMaGRXDqB");
         }
     }
 }
