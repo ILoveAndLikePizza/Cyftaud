@@ -67,9 +67,9 @@
             // 
             this.MainLabel.AutoSize = true;
             this.MainLabel.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.MainLabel.Location = new System.Drawing.Point(9, 9);
+            this.MainLabel.Location = new System.Drawing.Point(10, 12);
             this.MainLabel.Name = "MainLabel";
-            this.MainLabel.Size = new System.Drawing.Size(119, 37);
+            this.MainLabel.Size = new System.Drawing.Size(146, 46);
             this.MainLabel.TabIndex = 0;
             this.MainLabel.Text = "Cyftaud";
             // 
@@ -77,9 +77,9 @@
             // 
             this.DescriptionLabel.AutoSize = true;
             this.DescriptionLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.DescriptionLabel.Location = new System.Drawing.Point(12, 54);
+            this.DescriptionLabel.Location = new System.Drawing.Point(14, 72);
             this.DescriptionLabel.Name = "DescriptionLabel";
-            this.DescriptionLabel.Size = new System.Drawing.Size(298, 25);
+            this.DescriptionLabel.Size = new System.Drawing.Size(381, 32);
             this.DescriptionLabel.TabIndex = 1;
             this.DescriptionLabel.Text = "Copy Your Folders To A USB Drive";
             // 
@@ -89,9 +89,11 @@
             this.FolderBox.Controls.Add(this.TargetFolderBox);
             this.FolderBox.Controls.Add(this.DoZippedFolder);
             this.FolderBox.Controls.Add(this.DoNormalFolder);
-            this.FolderBox.Location = new System.Drawing.Point(17, 99);
+            this.FolderBox.Location = new System.Drawing.Point(19, 132);
+            this.FolderBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.FolderBox.Name = "FolderBox";
-            this.FolderBox.Size = new System.Drawing.Size(449, 99);
+            this.FolderBox.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.FolderBox.Size = new System.Drawing.Size(513, 132);
             this.FolderBox.TabIndex = 2;
             this.FolderBox.TabStop = false;
             this.FolderBox.Text = "Folder";
@@ -99,9 +101,10 @@
             // TargetFolderBrowse
             // 
             this.TargetFolderBrowse.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.TargetFolderBrowse.Location = new System.Drawing.Point(357, 55);
+            this.TargetFolderBrowse.Location = new System.Drawing.Point(408, 74);
+            this.TargetFolderBrowse.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TargetFolderBrowse.Name = "TargetFolderBrowse";
-            this.TargetFolderBrowse.Size = new System.Drawing.Size(75, 25);
+            this.TargetFolderBrowse.Size = new System.Drawing.Size(86, 30);
             this.TargetFolderBrowse.TabIndex = 4;
             this.TargetFolderBrowse.Text = "Browse...";
             this.TargetFolderBrowse.UseVisualStyleBackColor = true;
@@ -109,19 +112,21 @@
             // 
             // TargetFolderBox
             // 
-            this.TargetFolderBox.Location = new System.Drawing.Point(17, 56);
+            this.TargetFolderBox.Location = new System.Drawing.Point(19, 75);
+            this.TargetFolderBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TargetFolderBox.Name = "TargetFolderBox";
             this.TargetFolderBox.ReadOnly = true;
-            this.TargetFolderBox.Size = new System.Drawing.Size(334, 23);
+            this.TargetFolderBox.Size = new System.Drawing.Size(381, 27);
             this.TargetFolderBox.TabIndex = 3;
             // 
             // DoZippedFolder
             // 
             this.DoZippedFolder.AutoSize = true;
             this.DoZippedFolder.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.DoZippedFolder.Location = new System.Drawing.Point(180, 22);
+            this.DoZippedFolder.Location = new System.Drawing.Point(206, 29);
+            this.DoZippedFolder.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DoZippedFolder.Name = "DoZippedFolder";
-            this.DoZippedFolder.Size = new System.Drawing.Size(114, 20);
+            this.DoZippedFolder.Size = new System.Drawing.Size(142, 25);
             this.DoZippedFolder.TabIndex = 2;
             this.DoZippedFolder.Text = "ZIP/CYFT folder";
             this.DoZippedFolder.UseVisualStyleBackColor = true;
@@ -132,9 +137,10 @@
             this.DoNormalFolder.AutoSize = true;
             this.DoNormalFolder.Checked = true;
             this.DoNormalFolder.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.DoNormalFolder.Location = new System.Drawing.Point(17, 22);
+            this.DoNormalFolder.Location = new System.Drawing.Point(19, 29);
+            this.DoNormalFolder.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DoNormalFolder.Name = "DoNormalFolder";
-            this.DoNormalFolder.Size = new System.Drawing.Size(105, 20);
+            this.DoNormalFolder.Size = new System.Drawing.Size(133, 25);
             this.DoNormalFolder.TabIndex = 1;
             this.DoNormalFolder.TabStop = true;
             this.DoNormalFolder.Text = "Normal folder";
@@ -150,9 +156,11 @@
             this.DriveBox.Controls.Add(this.DoRootCopy);
             this.DriveBox.Controls.Add(this.DrivesList);
             this.DriveBox.Controls.Add(this.TargetDriveLabel);
-            this.DriveBox.Location = new System.Drawing.Point(17, 214);
+            this.DriveBox.Location = new System.Drawing.Point(19, 285);
+            this.DriveBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DriveBox.Name = "DriveBox";
-            this.DriveBox.Size = new System.Drawing.Size(449, 133);
+            this.DriveBox.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.DriveBox.Size = new System.Drawing.Size(513, 177);
             this.DriveBox.TabIndex = 3;
             this.DriveBox.TabStop = false;
             this.DriveBox.Text = "Drive";
@@ -161,9 +169,10 @@
             // 
             this.DoOverwrite.AutoSize = true;
             this.DoOverwrite.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.DoOverwrite.Location = new System.Drawing.Point(20, 96);
+            this.DoOverwrite.Location = new System.Drawing.Point(23, 128);
+            this.DoOverwrite.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DoOverwrite.Name = "DoOverwrite";
-            this.DoOverwrite.Size = new System.Drawing.Size(245, 20);
+            this.DoOverwrite.Size = new System.Drawing.Size(311, 25);
             this.DoOverwrite.TabIndex = 9;
             this.DoOverwrite.Text = "Overwrite files if they are already present";
             this.DoOverwrite.UseVisualStyleBackColor = true;
@@ -171,18 +180,20 @@
             // CustomFolderName
             // 
             this.CustomFolderName.Enabled = false;
-            this.CustomFolderName.Location = new System.Drawing.Point(300, 61);
+            this.CustomFolderName.Location = new System.Drawing.Point(343, 83);
+            this.CustomFolderName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CustomFolderName.Name = "CustomFolderName";
-            this.CustomFolderName.Size = new System.Drawing.Size(132, 23);
+            this.CustomFolderName.Size = new System.Drawing.Size(150, 27);
             this.CustomFolderName.TabIndex = 8;
             // 
             // DoFolderCopy
             // 
             this.DoFolderCopy.AutoSize = true;
             this.DoFolderCopy.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.DoFolderCopy.Location = new System.Drawing.Point(236, 63);
+            this.DoFolderCopy.Location = new System.Drawing.Point(270, 84);
+            this.DoFolderCopy.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DoFolderCopy.Name = "DoFolderCopy";
-            this.DoFolderCopy.Size = new System.Drawing.Size(67, 20);
+            this.DoFolderCopy.Size = new System.Drawing.Size(84, 25);
             this.DoFolderCopy.TabIndex = 7;
             this.DoFolderCopy.Text = "Folder:";
             this.DoFolderCopy.UseVisualStyleBackColor = true;
@@ -191,9 +202,9 @@
             // CopyToLabel
             // 
             this.CopyToLabel.AutoSize = true;
-            this.CopyToLabel.Location = new System.Drawing.Point(17, 65);
+            this.CopyToLabel.Location = new System.Drawing.Point(19, 87);
             this.CopyToLabel.Name = "CopyToLabel";
-            this.CopyToLabel.Size = new System.Drawing.Size(52, 15);
+            this.CopyToLabel.Size = new System.Drawing.Size(64, 20);
             this.CopyToLabel.TabIndex = 3;
             this.CopyToLabel.Text = "Copy to:";
             // 
@@ -202,9 +213,10 @@
             this.DoRootCopy.AutoSize = true;
             this.DoRootCopy.Checked = true;
             this.DoRootCopy.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.DoRootCopy.Location = new System.Drawing.Point(94, 63);
+            this.DoRootCopy.Location = new System.Drawing.Point(107, 84);
+            this.DoRootCopy.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DoRootCopy.Name = "DoRootCopy";
-            this.DoRootCopy.Size = new System.Drawing.Size(123, 20);
+            this.DoRootCopy.Size = new System.Drawing.Size(157, 25);
             this.DoRootCopy.TabIndex = 6;
             this.DoRootCopy.TabStop = true;
             this.DoRootCopy.Text = "Root of USB drive";
@@ -216,18 +228,19 @@
             this.DrivesList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DrivesList.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.DrivesList.FormattingEnabled = true;
-            this.DrivesList.Location = new System.Drawing.Point(137, 26);
+            this.DrivesList.Location = new System.Drawing.Point(157, 35);
+            this.DrivesList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DrivesList.Name = "DrivesList";
-            this.DrivesList.Size = new System.Drawing.Size(295, 23);
+            this.DrivesList.Size = new System.Drawing.Size(337, 28);
             this.DrivesList.TabIndex = 5;
             this.DrivesList.SelectedIndexChanged += new System.EventHandler(this.DrivesList_SelectedIndexChanged);
             // 
             // TargetDriveLabel
             // 
             this.TargetDriveLabel.AutoSize = true;
-            this.TargetDriveLabel.Location = new System.Drawing.Point(17, 29);
+            this.TargetDriveLabel.Location = new System.Drawing.Point(19, 39);
             this.TargetDriveLabel.Name = "TargetDriveLabel";
-            this.TargetDriveLabel.Size = new System.Drawing.Size(95, 15);
+            this.TargetDriveLabel.Size = new System.Drawing.Size(121, 20);
             this.TargetDriveLabel.TabIndex = 0;
             this.TargetDriveLabel.Text = "Target USB drive:";
             // 
@@ -239,9 +252,11 @@
             this.FormatBox.Controls.Add(this.DoQuickFormat);
             this.FormatBox.Controls.Add(this.FormatFileSystem);
             this.FormatBox.Controls.Add(this.DoDriveFormat);
-            this.FormatBox.Location = new System.Drawing.Point(17, 366);
+            this.FormatBox.Location = new System.Drawing.Point(19, 488);
+            this.FormatBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.FormatBox.Name = "FormatBox";
-            this.FormatBox.Size = new System.Drawing.Size(449, 118);
+            this.FormatBox.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.FormatBox.Size = new System.Drawing.Size(513, 157);
             this.FormatBox.TabIndex = 4;
             this.FormatBox.TabStop = false;
             this.FormatBox.Text = "Formatting";
@@ -250,27 +265,28 @@
             // 
             this.NewNameLabel.AutoSize = true;
             this.NewNameLabel.Enabled = false;
-            this.NewNameLabel.Location = new System.Drawing.Point(155, 57);
+            this.NewNameLabel.Location = new System.Drawing.Point(177, 76);
             this.NewNameLabel.Name = "NewNameLabel";
-            this.NewNameLabel.Size = new System.Drawing.Size(110, 15);
+            this.NewNameLabel.Size = new System.Drawing.Size(136, 20);
             this.NewNameLabel.TabIndex = 5;
             this.NewNameLabel.Text = "New volume name:";
             // 
             // NewDeviceName
             // 
             this.NewDeviceName.Enabled = false;
-            this.NewDeviceName.Location = new System.Drawing.Point(158, 75);
+            this.NewDeviceName.Location = new System.Drawing.Point(181, 100);
+            this.NewDeviceName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.NewDeviceName.Name = "NewDeviceName";
-            this.NewDeviceName.Size = new System.Drawing.Size(167, 23);
+            this.NewDeviceName.Size = new System.Drawing.Size(190, 27);
             this.NewDeviceName.TabIndex = 12;
             // 
             // FormatFSLabel
             // 
             this.FormatFSLabel.AutoSize = true;
             this.FormatFSLabel.Enabled = false;
-            this.FormatFSLabel.Location = new System.Drawing.Point(14, 57);
+            this.FormatFSLabel.Location = new System.Drawing.Point(16, 76);
             this.FormatFSLabel.Name = "FormatFSLabel";
-            this.FormatFSLabel.Size = new System.Drawing.Size(68, 15);
+            this.FormatFSLabel.Size = new System.Drawing.Size(84, 20);
             this.FormatFSLabel.TabIndex = 3;
             this.FormatFSLabel.Text = "File system:";
             // 
@@ -281,9 +297,10 @@
             this.DoQuickFormat.CheckState = System.Windows.Forms.CheckState.Checked;
             this.DoQuickFormat.Enabled = false;
             this.DoQuickFormat.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.DoQuickFormat.Location = new System.Drawing.Point(344, 77);
+            this.DoQuickFormat.Location = new System.Drawing.Point(393, 103);
+            this.DoQuickFormat.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DoQuickFormat.Name = "DoQuickFormat";
-            this.DoQuickFormat.Size = new System.Drawing.Size(102, 20);
+            this.DoQuickFormat.Size = new System.Drawing.Size(126, 25);
             this.DoQuickFormat.TabIndex = 13;
             this.DoQuickFormat.Text = "Quick format";
             this.DoQuickFormat.UseVisualStyleBackColor = true;
@@ -300,18 +317,20 @@
             "FAT32",
             "exFAT",
             "FAT"});
-            this.FormatFileSystem.Location = new System.Drawing.Point(17, 75);
+            this.FormatFileSystem.Location = new System.Drawing.Point(19, 100);
+            this.FormatFileSystem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.FormatFileSystem.Name = "FormatFileSystem";
-            this.FormatFileSystem.Size = new System.Drawing.Size(121, 23);
+            this.FormatFileSystem.Size = new System.Drawing.Size(138, 28);
             this.FormatFileSystem.TabIndex = 11;
             // 
             // DoDriveFormat
             // 
             this.DoDriveFormat.AutoSize = true;
             this.DoDriveFormat.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.DoDriveFormat.Location = new System.Drawing.Point(17, 26);
+            this.DoDriveFormat.Location = new System.Drawing.Point(19, 35);
+            this.DoDriveFormat.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DoDriveFormat.Name = "DoDriveFormat";
-            this.DoDriveFormat.Size = new System.Drawing.Size(226, 20);
+            this.DoDriveFormat.Size = new System.Drawing.Size(285, 25);
             this.DoDriveFormat.TabIndex = 10;
             this.DoDriveFormat.Text = "Format the USB drive before copying";
             this.DoDriveFormat.UseVisualStyleBackColor = true;
@@ -321,9 +340,10 @@
             // 
             this.StartButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.StartButton.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.StartButton.Location = new System.Drawing.Point(16, 496);
+            this.StartButton.Location = new System.Drawing.Point(18, 661);
+            this.StartButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.StartButton.Name = "StartButton";
-            this.StartButton.Size = new System.Drawing.Size(451, 38);
+            this.StartButton.Size = new System.Drawing.Size(515, 51);
             this.StartButton.TabIndex = 14;
             this.StartButton.Text = "Start!";
             this.StartButton.UseVisualStyleBackColor = true;
@@ -331,12 +351,14 @@
             // 
             // StatusBar
             // 
+            this.StatusBar.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.StatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Progress,
             this.StatusLabel});
-            this.StatusBar.Location = new System.Drawing.Point(0, 549);
+            this.StatusBar.Location = new System.Drawing.Point(0, 735);
             this.StatusBar.Name = "StatusBar";
-            this.StatusBar.Size = new System.Drawing.Size(483, 26);
+            this.StatusBar.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
+            this.StatusBar.Size = new System.Drawing.Size(552, 32);
             this.StatusBar.SizingGrip = false;
             this.StatusBar.Stretch = false;
             this.StatusBar.TabIndex = 8;
@@ -345,21 +367,22 @@
             // Progress
             // 
             this.Progress.Name = "Progress";
-            this.Progress.Size = new System.Drawing.Size(213, 20);
+            this.Progress.Size = new System.Drawing.Size(243, 24);
             // 
             // StatusLabel
             // 
             this.StatusLabel.Margin = new System.Windows.Forms.Padding(5, 3, 0, 2);
             this.StatusLabel.Name = "StatusLabel";
-            this.StatusLabel.Size = new System.Drawing.Size(39, 21);
+            this.StatusLabel.Size = new System.Drawing.Size(50, 27);
             this.StatusLabel.Text = "Ready";
             // 
             // CyftaudLogo
             // 
             this.CyftaudLogo.Image = global::Cyftaud.Properties.Resources.icon;
-            this.CyftaudLogo.Location = new System.Drawing.Point(385, 12);
+            this.CyftaudLogo.Location = new System.Drawing.Point(440, 16);
+            this.CyftaudLogo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CyftaudLogo.Name = "CyftaudLogo";
-            this.CyftaudLogo.Size = new System.Drawing.Size(82, 82);
+            this.CyftaudLogo.Size = new System.Drawing.Size(94, 109);
             this.CyftaudLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.CyftaudLogo.TabIndex = 9;
             this.CyftaudLogo.TabStop = false;
@@ -367,9 +390,10 @@
             // AboutButton
             // 
             this.AboutButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.AboutButton.Location = new System.Drawing.Point(293, 12);
+            this.AboutButton.Location = new System.Drawing.Point(335, 16);
+            this.AboutButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AboutButton.Name = "AboutButton";
-            this.AboutButton.Size = new System.Drawing.Size(75, 23);
+            this.AboutButton.Size = new System.Drawing.Size(86, 31);
             this.AboutButton.TabIndex = 0;
             this.AboutButton.Text = "About...";
             this.AboutButton.UseVisualStyleBackColor = true;
@@ -377,9 +401,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 575);
+            this.ClientSize = new System.Drawing.Size(552, 767);
             this.Controls.Add(this.AboutButton);
             this.Controls.Add(this.CyftaudLogo);
             this.Controls.Add(this.StatusBar);
@@ -391,6 +415,7 @@
             this.Controls.Add(this.MainLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = global::Cyftaud.Properties.Resources.cyftaud;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Cyftaud";
