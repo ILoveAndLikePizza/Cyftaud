@@ -379,10 +379,10 @@
             // CyftaudLogo
             // 
             this.CyftaudLogo.Image = global::Cyftaud.Properties.Resources.icon;
-            this.CyftaudLogo.Location = new System.Drawing.Point(440, 16);
+            this.CyftaudLogo.Location = new System.Drawing.Point(424, 16);
             this.CyftaudLogo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CyftaudLogo.Name = "CyftaudLogo";
-            this.CyftaudLogo.Size = new System.Drawing.Size(94, 109);
+            this.CyftaudLogo.Size = new System.Drawing.Size(109, 109);
             this.CyftaudLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.CyftaudLogo.TabIndex = 9;
             this.CyftaudLogo.TabStop = false;
@@ -390,7 +390,7 @@
             // AboutButton
             // 
             this.AboutButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.AboutButton.Location = new System.Drawing.Point(335, 16);
+            this.AboutButton.Location = new System.Drawing.Point(315, 16);
             this.AboutButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AboutButton.Name = "AboutButton";
             this.AboutButton.Size = new System.Drawing.Size(86, 31);
