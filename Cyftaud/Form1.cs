@@ -40,12 +40,13 @@ namespace Cyftaud
             string[] args = Environment.GetCommandLineArgs();
             if (args.Length >= 2)
             {
-                if (File.Exists(args[1]))
+                string[] fragments = args[1].Split('.');
+                if (File.Exists(args[1]) && fragments[fragments.Length - 1] == "cyft")
                 {
                     DoZippedFolder.Checked = true;
                     TargetFolderBox.Text = args[1];
                 }
-                else MessageBox.Show("You attempted to load an unexisting file!", "Unable to load", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else MessageBox.Show("You attempted to load an invalid file!", "Unable to load", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             DriveInfo[] drives = DriveInfo.GetDrives();
@@ -62,12 +63,11 @@ namespace Cyftaud
                     DrivesList.Items.Add(itemName);
                 } catch (System.IO.IOException) {}
             }
-            FormatFileSystem.SelectedIndex = 0;
             if (DrivesList.Items.Count > 0) DrivesList.SelectedIndex = 0;
             else
             {
                 MessageBox.Show("No removable drives were found.\nPlease connect one and restart Cyftaud to use it.", "No drives found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                FolderBox.Enabled = DriveBox.Enabled = FormatBox.Enabled = StartButton.Enabled = false;
+                FolderBox.Enabled = DriveBox.Enabled = StartButton.Enabled = false;
                 StatusLabel.Text = "No drives available";
             }
             // update checker
@@ -80,7 +80,7 @@ namespace Cyftaud
                 string responseText = response.Content.ReadAsStringAsync().Result;
                 if (!responseText.Contains("\"name\":\"Cyftaud v" + ProductVersion + "\""))
                 {
-                    if (MessageBox.Show("There is a new update available for Cyftaud.\nWould you like to visit the download page?", "Update available", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) System.Diagnostics.Process.Start("cmd.exe", "/c start https://github.com/ILoveAndLikePizza/Cyftaud/releases");
+                    if (MessageBox.Show("There is a new update available for Cyftaud.\nWould you like to visit the download page?", "Update available", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) RunCommand("cmd.exe", "/c start https://github.com/ILoveAndLikePizza/Cyftaud/releases");
                 }
             }
             catch (Exception)
@@ -117,28 +117,38 @@ namespace Cyftaud
         {
             if (finished) Environment.Exit(1); else
             {
-                string oldFS = GetDriveInformation().DriveFormat;
                 if (DrivesList.Items.Count == 0) {
                     MessageBox.Show("There are no removable drives available!", "Unable to start", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    StatusLabel.Text = "Action could not start.";
                     return;
                 }
                 if (TargetFolderBox.Text.Length == 0)
                 {
                     MessageBox.Show("You did not specify a folder path!", "Unable to start", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    StatusLabel.Text = "Action could not start.";
                     return;
                 }
                 else if (TargetFolderBox.Text.Substring(0, 2) == GetDriveLetter())
                 {
                     MessageBox.Show("You cannot copy a folder to the drive it is from!", "Unable to start", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    StatusLabel.Text = "Action could not start.";
                     return;
                 }
-                if (DoDriveFormat.Checked)
+                if (DoDriveErase.Checked)
                 {
-                    if (MessageBox.Show("WARNING: ALL DATA ON '" + GetDriveInformation().VolumeLabel + "'\nWILL BE DESTROYED AND CANNOT BE RECOVERED!\nPlease ensure if important files are backed up before proceeding!", "IMPORTANT WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No) return;
+                    if (MessageBox.Show("WARNING: ALL DATA ON '" + GetDriveInformation().VolumeLabel + "'\nWILL BE DESTROYED AND CANNOT BE RECOVERED!\nPlease ensure if important files are backed up before proceeding!", "IMPORTANT WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                    {
+                        StatusLabel.Text = "Action was aborted.";
+                        return;
+                    }
                 }
                 else if (DoOverwrite.Checked)
                 {
-                    if (MessageBox.Show("WARNING: Files on '" + GetDriveInformation().VolumeLabel + "'\nmight be overwritten.\nPlease ensure if important files are backed up before proceeding!", "Important warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No) return;
+                    if (MessageBox.Show("WARNING: Files on '" + GetDriveInformation().VolumeLabel + "'\nmight be overwritten.\nPlease ensure if important files are backed up before proceeding!", "Important warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                    {
+                        StatusLabel.Text = "Action was aborted.";
+                        return;
+                    }
                 }
                 if (CustomFolderName.Enabled)
                 {
@@ -146,39 +156,43 @@ namespace Cyftaud
                     if (CustomFolderName.Text.Length == 0)
                     {
                         MessageBox.Show("Your folder name is empty!", "Unable to start", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        StatusLabel.Text = "Action could not start.";
                         return;
                     }
                     else if (!match.Success)
                     {
                         MessageBox.Show("Your folder name is invalid!", "Unable to start", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        StatusLabel.Text = "Action could not start.";
                         return;
                     }
                 }
-                if (NewDeviceName.Enabled)
+                
+                running = true;
+                FolderBox.Enabled = DriveBox.Enabled = StartButton.Enabled = false;
+                System.Threading.Thread.Sleep(500);
+                if (DoDriveErase.Checked)
                 {
-                    System.Text.RegularExpressions.Match match = Regex.Match(NewDeviceName.Text, @"^[A-Za-z0-9_]+$");
-                    if (NewDeviceName.Text.Length == 0)
+                    StatusLabel.Text = "Erasing...";
+                    System.Threading.Thread.Sleep(100);
+                    foreach (string dir in Directory.GetDirectories(GetDriveLetter()))
                     {
-                        MessageBox.Show("Your new volume name is empty!", "Unable to start", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        try
+                        {
+                            Directory.Delete(dir, true);
+                        }
+                        catch (Exception) { }
                     }
-                    else if (!match.Success)
+                    foreach (string file in Directory.GetFiles(GetDriveLetter()))
                     {
-                        MessageBox.Show("Your new volume name is invalid!", "Unable to start", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        try
+                        {
+                            File.Delete(file);
+                        }
+                        catch (Exception) { }
                     }
-                }
-
-                FolderBox.Enabled = DriveBox.Enabled = FormatBox.Enabled = StartButton.Enabled = false;
-                StatusLabel.Visible = running = true;
-                if (DoDriveFormat.Checked)
-                {
-                    StatusLabel.Text = "Formatting...";
-                    string newFS = (FormatFileSystem.Text == FormatFileSystem.Items[0].ToString()) ? oldFS : FormatFileSystem.Text;
-                    string quickFormat = (DoQuickFormat.Checked) ? " /Q" : "";
-                    //RunCommand("format.com", GetDriveLetter() + " /FS:" + newFS + quickFormat + " /V:" + NewDeviceName.Text);
                 }
                 StatusLabel.Text = "Copying...";
+                System.Threading.Thread.Sleep(100);
                 if (DoFolderCopy.Checked && !Directory.Exists(GetDriveLetter() + "\\" + CustomFolderName.Text)) Directory.CreateDirectory(GetDriveLetter() + "\\" + CustomFolderName.Text);
 
                 string target = (DoFolderCopy.Checked) ? GetDriveLetter() + "\\" + CustomFolderName.Text + "\\": GetDriveLetter() + "\\";
@@ -207,13 +221,9 @@ namespace Cyftaud
             }
         }
 
-        private void DoDriveFormat_CheckedChanged(object sender, EventArgs e)
+        private void DoDriveErase_CheckedChanged(object sender, EventArgs e)
         {
-            DoOverwrite.Enabled = !DoDriveFormat.Checked;
-            FormatFSLabel.Enabled = NewNameLabel.Enabled = FormatFileSystem.Enabled = NewDeviceName.Enabled = DoQuickFormat.Enabled
-                = DoDriveFormat.Checked;
-
-            NewDeviceName.Text = (NewDeviceName.Enabled) ? GetDriveInformation().VolumeLabel : "";
+            DoOverwrite.Enabled = !DoDriveErase.Checked;
         }
 
         private void CopyTarget_CheckedChanged(object sender, EventArgs e)
@@ -224,11 +234,6 @@ namespace Cyftaud
         private void TypeOfFolder_CheckedChanged(object sender, EventArgs e)
         {
             TargetFolderBox.Text = "";
-        }
-
-        private void DrivesList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (DoDriveFormat.Checked) NewDeviceName.Text = GetDriveInformation().VolumeLabel;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
