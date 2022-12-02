@@ -9,7 +9,7 @@ Cyftaud is a free, open-source and easy-to-use tool to copy (zipped) folders to 
 ![](/Cyftaud/Resources/icon.png)  
 *The Cyftaud icon*
 
-![](/Cyftaud/static/mainwindow.png)  
+![](/static/mainwindow.png)  
 *The Cyftaud main window*
 
 ## Installing
